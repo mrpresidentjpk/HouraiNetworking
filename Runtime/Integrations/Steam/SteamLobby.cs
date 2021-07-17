@@ -27,10 +27,12 @@ internal class SteamLobby : Lobby {
 
   readonly SteamLobbyManager _manager;
 
-  public SteamLobby(Steamworks.Data.Lobby lobby, SteamLobbyManager manager) : base() {
+  public SteamLobby(Steamworks.Data.Lobby lobby, SteamLobbyManager manager, bool refreshMembers = true) : base() {
+    _lobby = lobby;
     Assert.IsNotNull(manager);
     _manager = manager;
-    Members.Refresh();
+    if (refreshMembers) //Steam does not let you see IDs of non-friends until you join the lobby, defaults to 0.
+        Members.Refresh();
   }
 
   public override int MemberCount => _lobby.MemberCount;

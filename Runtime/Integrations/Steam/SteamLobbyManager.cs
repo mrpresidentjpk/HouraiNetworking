@@ -73,7 +73,7 @@ internal class SteamLobbyManager : ILobbyManager {
     if (result == null) return new Lobby[0];
     var lobbies = new Lobby[result.Length];
     for (var i = 0; i < lobbies.Length; i++) {
-        lobbies[i] = new SteamLobby(result[i], this);
+        lobbies[i] = new SteamLobby(result[i], this, refreshMembers:false);
     }
     return lobbies;
   }
